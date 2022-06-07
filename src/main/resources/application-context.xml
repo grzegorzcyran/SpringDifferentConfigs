@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--happySuggestions jest beanem z klasy HappySuggestionsService
+    która ma konstruktor bezparametrowy-->
+    <bean id="happySuggestions" class="demo.spring.config.xmlConfig.HappySuggestionsService"></bean>
+
+    <!--baseballCoach wymaga podania dwóch parametrów:
+     - jednym jest obiekt klasy happySuggestions
+     - drugi, nazwę - ustawiamy na sztywno nadając wartość bezpośrednio w konfuguracji-->
+    <bean id="baseballCoach" class="demo.spring.config.xmlConfig.BaseBallCoach">
+        <constructor-arg ref="happySuggestions"></constructor-arg>
+        <constructor-arg name="name" value="Trener baseballa"></constructor-arg>
+    </bean>
+
+    <!-- Co do zasady NIE MIESZAMY metod inicjowania beanów -
+     jak już projekt robi setterami to róbmy setterami,
+     albo przepiszmy wszystko na inicjowanie konstruktorem :]
+     -->
+    <bean id="cricketCoach" class="demo.spring.config.xmlConfig.CricketCoach">
+        <property name="suggestionsService" ref="happySuggestions"></property>
+        <property name="emailAddress" value="some@address.com"></property>
+        <property name="team" value="Hindu Lazy Team"></property>
+    </bean>
+
+    <bean id="anotherCricketCoach" class="demo.spring.config.xmlConfig.CricketCoach">
+        <property name="suggestionsService" ref="happySuggestions"></property>
+        <property name="emailAddress" value="some@address.com"></property>
+    </bean>
+</beans>
