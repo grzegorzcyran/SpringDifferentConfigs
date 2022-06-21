@@ -12,4 +12,5 @@
     oznaczonych anotacjami Springowymi, czyli takich nad którymi ma przejąć kontrolę
     -->
     <context:component-scan base-package="demo.spring.config.annotationConfig" />
+    <context:property-placeholder location="sport.properties" />
 </beans>
